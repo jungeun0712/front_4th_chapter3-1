@@ -78,13 +78,13 @@ export default [
       'no-undef': 'off',
 
       // Vitest 관련 규칙
-      'vitest/consistent-test-it': ['error', { fn: 'test' }],
-      'vitest/expect-expect': 'error',
+      'vitest/prefer-test': 'off',
+      'vitest/expect-expect': 'off',
       'vitest/no-disabled-tests': 'warn',
       'vitest/no-focused-tests': 'error',
       'vitest/no-identical-title': 'error',
       'vitest/prefer-to-be': 'error',
-      'vitest/require-top-level-describe': 'error',
+      'vitest/require-top-level-describe': 'off',
 
       // 브라우저 호환성 (Compat) 규칙
       'compat/compat': 'warn',

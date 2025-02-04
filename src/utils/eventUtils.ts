@@ -25,8 +25,10 @@ function filterEventsByDateRangeAtWeek(events: Event[], currentDate: Date) {
 }
 
 function filterEventsByDateRangeAtMonth(events: Event[], currentDate: Date) {
+  console.log(currentDate);
   const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
   const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+  console.log(monthStart, monthEnd);
   return filterEventsByDateRange(events, monthStart, monthEnd);
 }
 
@@ -45,6 +47,5 @@ export function getFilteredEvents(
   if (view === 'month') {
     return filterEventsByDateRangeAtMonth(searchedEvents, currentDate);
   }
-
   return searchedEvents;
 }
