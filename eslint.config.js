@@ -66,7 +66,6 @@ export default [
       // 최신 JavaScript 스타일 규칙
       'prefer-const': 'error',
       'no-var': 'error',
-      'arrow-body-style': ['error', 'as-needed'],
       'object-shorthand': 'error',
       'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
 
