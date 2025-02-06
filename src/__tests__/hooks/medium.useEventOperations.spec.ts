@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react';
+import { act, render, renderHook, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 
 import {
@@ -9,10 +9,12 @@ import {
 import { useEventOperations } from '../../hooks/useEventOperations.ts';
 import { server } from '../../setupTests.ts';
 import { Event } from '../../types.ts';
-
 // ? Medium: 아래 toastFn과 mock과 이 fn은 무엇을 해줄까요?
+
+// mock 함수를 생성
 const toastFn = vi.fn();
 
+// 특정 모듈의 구현을 테스트를 위한 가짜 구현으로 대체할 때 사용
 vi.mock('@chakra-ui/react', async () => {
   const actual = await vi.importActual('@chakra-ui/react');
   return {
@@ -21,9 +23,47 @@ vi.mock('@chakra-ui/react', async () => {
   };
 });
 
-it('저장되어있는 초기 이벤트 데이터를 적절하게 불러온다', async () => {});
+it('저장되어있는 초기 이벤트 데이터를 적절하게 불러온다', async () => {
+  const events: Event[] = [
+    {
+      id: '1',
+      title: '기존 회의',
+      date: '2024-10-15',
+      startTime: '09:00',
+      endTime: '10:00',
+      description: '기존 팀 미팅',
+      location: '회의실 B',
+      category: '업무',
+      repeat: { type: 'none', interval: 0 },
+      notificationTime: 10,
+    },
+  ];
+  setupMockHandlerCreation(events);
 
-it('정의된 이벤트 정보를 기준으로 적절하게 저장이 된다', async () => {});
+  const { result } = renderHook(() => useEventOperations(false));
+  expect(result.current.events).toEqual(events);
+  // await waitFor(() => {
+  // });
+});
+
+it('정의된 이벤트 정보를 기준으로 적절하게 저장이 된다', async () => {
+  // setupMockHandlerCreation();
+  // const { result } = renderHook(() => useEventOperations(false));
+  // await act(async () => {
+  //   await result.current.saveEvent({
+  //     title: '새로운 이벤트',
+  //     date: '2024-10-15',
+  //     startTime: '09:00',
+  //     endTime: '10:00',
+  //     description: '새로운 이벤트입니다',
+  //     location: '한국',
+  //     category: '기타',
+  //     repeat: { type: 'none', interval: 0 },
+  //     notificationTime: 10,
+  //   });
+  // });
+  // expect(result.current.events).toEqual(events);
+});
 
 it("새로 정의된 'title', 'endTime' 기준으로 적절하게 일정이 업데이트 된다", async () => {});
 
