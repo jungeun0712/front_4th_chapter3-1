@@ -98,11 +98,6 @@ export default [
       'sonarjs/cognitive-complexity': 'warn',
       'sonarjs/no-identical-expressions': 'warn',
       'sonarjs/pseudo-random': 'warn',
-
-      // 모던 JavaScript (Unicorn)
-      'unicorn/prefer-module': 'error',
-      'unicorn/prefer-ternary': 'error',
-      'unicorn/prefer-node-protocol': 'error',
     },
   },
   prettier,
